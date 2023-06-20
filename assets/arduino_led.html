@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arduino LED</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+      }
+
+      header {
+        background-color: #ffffff;
+        padding: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 30px;
+        margin: 0;
+      }
+      .kepala {
+        text-align: center;
+      }
+
+      main {
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      p {
+        font-size: 18px;
+        margin-top: 10px;
+        text-align: justify;
+      }
+
+      ul {
+        font-size: 18px;
+        margin-top: 10px;
+        padding-left: 20px;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      .vcard {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      .vcardd {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 900px;
+        margin-top: 40px;
+        margin: 40px auto 0; /* Mengcenterkan vcard1 */
+        background-color: #023bce;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      .title-container {
+         display: flex;
+         justify-content: center;
+         margin-bottom: 20px;
+        }
+
+      .putih {
+        color: #ffffff;
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: justify;
+      }
+
+      .putih1 {
+        color: #ffffff;
+        margin-top:-8px;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: justify;
+      }
+
+      .image-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .welcome-message {
+        font-family: "Poppins", sans-serif;
+        font-weight: 900;
+        font-size: 80px;
+        text-align: left;
+        margin-top: 50px;
+        margin-left: 20px;
+      }
+
+      .image-container img {
+        width: 500px;
+        height: auto;
+        margin-left: 60px;
+        border-radius: 40px;
+      }
+
+      .footer-text {
+        text-align: center;
+        margin: 0;
+      }
+
+      .vcard-slide {
+        margin-top: 20px;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .vcard-slide img {
+        display: none;
+        width: 200px;
+        margin-bottom: 10px;
+        height: auto;
+        margin: 0 5px;
+        border-radius: 25px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .vcard-slide img.active {
+        display: inline-block;
+      }
+
+      .vcard-slide img:hover {
+        transform: scale(1.1);
+      }
+
+      .slide-controls {
+        margin-top: 10px;
+        text-align: center;
+      }
+
+      .slide-button {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        padding: 5px 10px;
+        background-color: #0059ff;
+        color: #ffffff;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      .slide-button:hover {
+        background-color: #ffffff;
+        color: #0059ff;
+      }
+
+      @media screen and (max-width: 900px) {
+        h1 {
+          font-size: 24px;
+        }
+
+        p {
+          font-size: 16px;
+        }
+
+        ul {
+          font-size: 16px;
+        }
+
+        footer {
+          font-size: 12px;
+        }
+      }
+    </style>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        const vcardSlide = document.querySelector(".vcard-slide");
+        const images = vcardSlide.getElementsByTagName("img");
+        const numImages = images.length;
+        let currentImage = 0;
+
+        function slideNext() {
+          images[currentImage].classList.remove("active");
+          currentImage = (currentImage + 1) % numImages;
+          images[currentImage].classList.add("active");
+        }
+
+        function slidePrevious() {
+          images[currentImage].classList.remove("active");
+          currentImage = (currentImage - 1 + numImages) % numImages;
+          images[currentImage].classList.add("active");
+        }
+
+        document
+          .querySelector(".slide-next")
+          .addEventListener("click", slideNext);
+
+        document
+          .querySelector(".slide-previous")
+          .addEventListener("click", slidePrevious);
+      });
+    </script>
+  </head>
+  <body>
+    <nav>
+      <h1 class="kepala">MuhammadDemas.</h1>
+    </nav>
+
+    <main>
+      <div class="image-container">
+        <p class="welcome-message">Apa Itu <br />Arduino?</p>
+        <img src="img/arduino.jpg" alt="Gambar Arduino" />
+      </div>
+
+      <div class="vcard">
+        
+        <p>
+          Arduino adalah platform open-source (dibuka untuk umum) yang dirancang
+          untuk memudahkan pembuatan prototipe perangkat elektronik. Arduino
+          terdiri dari mikrokontroler yang dapat diprogram dan berbagai modul
+          sensor dan aktuator yang dapat dihubungkan untuk mengontrol lingkungan
+          fisik di sekitar kita.
+        </p>
+      </div>
+
+      <div class="vcard-slide">
+        <h2>Alat Dan Bahan</h2>
+        <img src="img/arduino.jpg" alt="vCard 1" class="active" />
+        <img src="img/led.jpg" alt="vCard 2" />
+        <img src="img/beardboard.webp" alt="vCard 3" />
+        <img src="img/kabel jumper.jpg" alt="vCard 4" />
+        <img src="img/resistor2.webp" alt="vCard 5" />
+        <img src="img/arduino ide.png" alt="vCard 6" />
+      </div>
+
+      <div class="slide-controls">
+        <button class="slide-previous slide-button">&#8249;</button>
+        <button class="slide-next slide-button">&#8250;</button>
+      </div>
+
+      <div class="vcardd">
+        <h3 class="putih">Langkah-Langkah Penyelesaian</h3>
+        <p class="putih1">
+          1. Siapkan Arduino, resistor, lampu LED, kabel jumper, dan kabel USB.
+          <br />
+          2. Pasang lampu LED pada breadboard dan sambungkan salah satu ujung
+          LED ke resistor. <br />
+          3. Sambungkan ujung lain dari resistor ke pin digital 7 pada
+          Arduino.<br />
+          4. Sambungkan ujung lain dari LED ke pin GND pada Arduino.<br />
+          5. Sambungkan kabel jumper dari pin digital 6 pada Arduino ke
+          breadboard.<br />
+          6. Pasang lampu LED kedua pada breadboard dan sambungkan salah satu
+          ujung LED ke resistor.<br />
+          7. Sambungkan ujung lain dari resistor ke pin digital 6 pada
+          Arduino.<br />
+          8. Sambungkan ujung lain dari LED kedua ke pin GND pada Arduino.<br />
+          9. Sambungkan kabel jumper dari pin digital 4 pada Arduino ke
+          breadboard.<br />
+          10. Pasang lampu LED ketiga pada breadboard dan sambungkan salah satu
+          ujung LED ke resistor.<br />
+          11. Sambungkan ujung lain dari resistor ke pin digital 4 pada
+          Arduino.<br />
+          12. Sambungkan ujung lain dari LED ketiga ke pin GND pada Arduino.<br />
+          13. Sambungkan kabel USB dari Arduino ke komputer Anda.<br />
+          14. Buka software Arduino IDE dan buat program untuk mengontrol LED
+          sesuai dengan kebutuhan Anda.<br />
+          15. Upload program ke Arduino dan jalankan program untuk mengontrol
+          LED.<br /> </br>
+          Dengan langkah-langkah di atas, Anda dapat membuat perangkaian
+          sederhana menggunakan resistor, lampu LED, kabel jumper, dan kabel USB
+          pada Arduino. Anda dapat memodifikasi perangkaian tersebut sesuai
+          dengan kebutuhan Anda dan menambahkan komponen elektronik lainnya
+          untuk membuat perangkaian yang lebih kompleks.
+        </p>
+      </div>
+
+      <footer>
+        <p class="footer-text">
+          &copy; 2023 MuhammadDemas. Hak cipta dilindungi.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

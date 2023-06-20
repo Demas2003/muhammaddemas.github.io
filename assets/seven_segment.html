@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arduino LED</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+      }
+
+      header {
+        background-color: #ffffff;
+        padding: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 30px;
+        margin: 0;
+      }
+      .kepala {
+        text-align: center;
+      }
+
+      main {
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      p {
+        font-size: 18px;
+        margin-top: 10px;
+        text-align: justify;
+      }
+
+      ul {
+        font-size: 18px;
+        margin-top: 10px;
+        padding-left: 20px;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      .vcard {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      .vcardd {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 900px;
+        margin-top: 40px;
+        margin: 40px auto 0; /* Mengcenterkan vcard1 */
+        background-color: #023bce;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      .title-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .putih {
+        color: #ffffff;
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: justify;
+      }
+
+      .putih1 {
+        color: #ffffff;
+        margin-top: -8px;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: justify;
+      }
+
+      .hitam {
+        color: #000000;
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: justify;
+      }
+
+      .image-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .image-container-kanan {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .langkah {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .welcome-message {
+        font-family: "Poppins", sans-serif;
+        font-weight: 900;
+        font-size: 60px;
+        text-align: left;
+        margin-top: 50px;
+        margin-left: 20px;
+      }
+
+      .welcome-message-kanan {
+        font-family: "Poppins", sans-serif;
+        font-weight: 900;
+        font-size: 60px;
+        text-align: center;
+        margin-top: 50px;
+        margin-left: 20px;
+      }
+
+      .image-container img {
+        width: 250px;
+        height: auto;
+        margin-left: 60px;
+        border-radius: 40px;
+      }
+
+      .footer-text {
+        text-align: center;
+        margin: 0;
+      }
+
+      .vcard-slide {
+        margin-top: -40px;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .vcard-slide img {
+        display: none;
+        width: 200px;
+        margin-bottom: 10px;
+        height: auto;
+        margin: 0 5px;
+        border-radius: 25px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .vcard-slide img.active {
+        display: inline-block;
+      }
+
+      .vcard-slide img:hover {
+        transform: scale(1.1);
+      }
+
+      .slide-controls {
+        margin-top: 10px;
+        text-align: center;
+      }
+
+      .slide-button {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        padding: 5px 10px;
+        background-color: #0059ff;
+        color: #ffffff;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      .slide-button:hover {
+        background-color: #ffffff;
+        color: #0059ff;
+      }
+
+      .vcard {
+        position: relative;
+      }
+
+      .vcard-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .vcard2 {
+        width: 900px;
+        height: auto;
+        border-radius: 30px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 40px auto 0;
+        padding: 20px;
+        display: flex;
+      }
+
+      .vcard-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 40px;
+      }
+
+      .video-container {
+        width: 200px;
+        height: 150px;
+        border-radius: 33px;
+
+        margin-right: 20px;
+      }
+
+      .blue-rectangle {
+        width: 5px;
+        border-radius: 10px;
+        height: 150px;
+        background-color: #043bc5;
+        margin-right: 20px;
+      }
+
+      .video-container iframe {
+        border-radius: 30px; /* Menentukan tingkat melengkung pada sudut iframe */
+      }
+
+      .vcard-content.active {
+        opacity: 1;
+      }
+      @media screen and (max-width: 900px) {
+        h1 {
+          font-size: 24px;
+        }
+
+        p {
+          font-size: 16px;
+        }
+
+        ul {
+          font-size: 16px;
+        }
+
+        footer {
+          font-size: 12px;
+        }
+      }
+    </style>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        const vcardSlide = document.querySelector(".vcard-slide");
+        const images = vcardSlide.getElementsByTagName("img");
+        const numImages = images.length;
+        let currentImage = 0;
+
+        function slideNext() {
+          images[currentImage].classList.remove("active");
+          currentImage = (currentImage + 1) % numImages;
+          images[currentImage].classList.add("active");
+          vcardSlide.classList.remove("slide-previous");
+          vcardSlide.classList.add("slide-next");
+        }
+
+        function slidePrevious() {
+          images[currentImage].classList.remove("active");
+          currentImage = (currentImage - 1 + numImages) % numImages;
+          images[currentImage].classList.add("active");
+          vcardSlide.classList.remove("slide-next");
+          vcardSlide.classList.add("slide-previous");
+        }
+
+        document
+          .querySelector(".slide-next")
+          .addEventListener("click", slideNext);
+
+        document
+          .querySelector(".slide-previous")
+          .addEventListener("click", slidePrevious);
+      });
+    </script>
+  </head>
+  <body>
+    <nav>
+      <h1 class="kepala">MuhammadDemas.</h1>
+    </nav>
+
+    <main>
+      <div class="image-container">
+        <p class="welcome-message">
+          Apa Itu <br />
+          SevenSegmen?
+        </p>
+        <img src="img/sevenseg.jpg" alt="Gambar Arduino" />
+      </div>
+
+      <div class="vcard">
+        <p>
+          seven segment adalah alat yang digunakan untuk menampilkan angka
+          desimal dan terdiri dari 7 batang LED yang tersusun membentuk angka 8.
+          Alat ini juga bisa menampilkan huruf A-F yang disebut DOT MATRIKS.
+          Prinsip kerjanya adalah menerima input berupa biner lalu melakukan
+          konversi dan memberikan output angka desimal. Ada dua jenis seven
+          segment, yaitu common katoda dan common anoda. Common katoda aktif
+          pada logika 1, sedangkan common anoda aktif pada logika 0
+        </p>
+      </div>
+      <div class="image-container-kanan">
+        <p class="welcome-message-kanan">
+          Membuat Rangkaian <br />
+          SevenSegment
+        </p>
+      </div>
+
+      <div class="vcard-slide">
+        <h2>Alat Dan Bahan</h2>
+        <img src="img/arduino.jpg" alt="vCard 1" class="active" />
+        <img src="img/sevenseg.jpg" alt="vCard 2" />
+        <img src="img/beardboard.webp" alt="vCard 3" />
+        <img src="img/kabel jumper.jpg" alt="vCard 4" />
+        <img src="img/usb.jpg" alt="vCard 5" />
+        <img src="img/arduino ide.png" alt="vCard 6" />
+      </div>
+
+      <div class="slide-controls">
+        <button class="slide-previous slide-button">&#8249;</button>
+        <button class="slide-next slide-button">&#8250;</button>
+      </div>
+
+      <div class="vcardd">
+        <h3 class="putih">Langkah-Langkah Penyelesaian</h3>
+        <p class="putih1">
+          1. Siapkan komponen yang diperlukan:
+          <br />
+          <br />
+          A. Arduino board.
+          <br />
+          B. Display Seven Segment (Common Anode atau Common Cathode).
+          <br />
+          C. 8 kabel jumper.
+          <br />
+          <br />
+          2. Sambungkan pin Arduino dengan pin Seven Segment:
+          <br />
+          <br />
+          A. Pin DP (titik desimal) pada Seven Segment dihubungkan ke pin 5 pada
+          Arduino.
+          <br />
+          B. Pin G (segment G) pada Seven Segment dihubungkan ke pin 9 pada
+          Arduino.
+          <br />
+          C. Pin F (segment F) pada Seven Segment dihubungkan ke pin 8 pada
+          Arduino.
+          <br />
+          D. Pin E (segment E) pada Seven Segment dihubungkan ke pin 7 pada
+          Arduino.
+          <br />
+          E. Pin D (segment D) pada Seven Segment dihubungkan ke pin 6 pada
+          Arduino.
+          <br />
+          F. Pin C (segment C) pada Seven Segment dihubungkan ke pin 4 pada
+          Arduino.
+          <br />
+          G. Pin B (segment B) pada Seven Segment dihubungkan ke pin 3 pada
+          Arduino.
+          <br />
+          H. Pin A (segment A) pada Seven Segment dihubungkan ke pin 2 pada
+          Arduino.
+          <br />
+          <br />
+          3. Sambungkan Arduino ke komputer menggunakan kabel USB untuk
+          mengunggah program dan memberi daya pada Arduino.
+          <br />
+          <br />
+          4. Buka perangkat lunak Arduino IDE di komputer Anda.
+          <br />
+          <br />
+          5. Buat program baru dan salin kode yang telah Anda berikan ke dalam
+          program tersebut.
+          <br />
+          <br />
+          6. Verifikasi program untuk memastikan tidak ada kesalahan penulisan
+          sintaksis dalam kode.
+          <br />
+          <br />
+          7. Unggah program ke Arduino board dengan mengklik tombol "Upload" di
+          Arduino IDE.
+          <br />
+          <br />
+          8. Setelah program terunggah, Arduino akan memulai eksekusi program
+          dan Seven Segment akan menampilkan angka dari 0 hingga 10 secara
+          berurutan.
+          <br />
+          <br />
+          9. Pastikan Arduino tersambung dengan Seven Segment dan bahwa
+          penampilan angka sesuai dengan harapan Anda.
+        </p>
+      </div>
+
+      <div class="vcard-container">
+        <div class="vcard2">
+          <div class="video-container">
+            <!-- Tambahkan iframe video YouTube di sini -->
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/L6yKPOFwTok"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="blue-rectangle"></div>
+          <div class="text-container">
+            <h3>Tutorial Pembuatan Rangkaian SevenSegment</h3>
+            <p>
+              Simak dan pahami penjelasan yang ada di dalam video untuk <br />
+              langkah-langkah lebih lanjut merangkai seven segment.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p class="footer-text">
+          &copy; 2023 MuhammadDemas. Hak cipta dilindungi.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
